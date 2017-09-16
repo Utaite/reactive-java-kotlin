@@ -1,0 +1,48 @@
+package chapter2.subjects;
+
+import io.reactivex.Observable;
+import io.reactivex.subjects.AsyncSubject;
+
+
+public class AsyncSubjectExample {
+
+    public void marbleDiagram() {
+        AsyncSubject<String> subject = AsyncSubject.create();
+        subject.subscribe(data -> System.out.println("Subscriber #1 -> " + data));
+        subject.onNext("1");
+        subject.onNext("3");
+        subject.subscribe(data -> System.out.println("Subscriber #2 -> " + data));
+        subject.onNext("5");
+        subject.onComplete();
+    }
+
+    public void asSubscriber() {
+        Float[] temperature = {10.1F, 13.4F, 12.5F};
+        Observable<Float> source = Observable.fromArray(temperature);
+
+        AsyncSubject<Float> subject = AsyncSubject.create();
+        subject.subscribe(data -> System.out.println("Subscriber #1 -> " + data));
+
+        source.subscribe(subject);
+    }
+
+    public void afterComplete() {
+        AsyncSubject<Integer> subject = AsyncSubject.create();
+        subject.onNext(10);
+        subject.onNext(11);
+        subject.subscribe(data -> System.out.println("Subscriber #1 -> " + data));
+        subject.onNext(12);
+        subject.onComplete();
+        subject.onNext(13);
+        subject.subscribe(data -> System.out.println("Subscriber #2 -> " + data));
+        subject.subscribe(data -> System.out.println("Subscriber #3 -> " + data));
+    }
+
+    public static void main(String[] args) {
+        AsyncSubjectExample demo = new AsyncSubjectExample();
+        demo.marbleDiagram();
+        demo.asSubscriber();
+        demo.afterComplete();
+    }
+
+}
