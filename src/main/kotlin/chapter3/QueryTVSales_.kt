@@ -2,6 +2,7 @@ package chapter3
 
 import io.reactivex.Observable
 
+
 class QueryTVSales_ {
 
     fun run() {
@@ -19,7 +20,7 @@ class QueryTVSales_ {
         tvSales.subscribe { tot -> println("TV Sales: $$tot") }
     }
 
-    fun run2(): Int {
+    fun run2() {
         val sales: MutableList<Pair<String, Int>> = mutableListOf()
 
         sales.add("TV" to 2500)
@@ -27,15 +28,19 @@ class QueryTVSales_ {
         sales.add("TV" to 1600)
         sales.add("Phone" to 800)
 
-        return sales.filter { "TV" == it.first }
-                .map { it.second }
-                .reduce { t1, t2 -> t1 + t2 }
+        println("TV Sales: $${getSales(sales)}")
     }
+
+    private fun getSales(sales: MutableList<Pair<String, Int>>): Int =
+            sales.filter { "TV" == it.first }
+                    .map { it.second }
+                    .reduce { t1, t2 -> t1 + t2 }
+
 
 }
 
 fun main(args: Array<String>) {
     val demo = QueryTVSales_()
     demo.run()
-    println("TV Sales: $${demo.run2()}")
+    demo.run2()
 }
