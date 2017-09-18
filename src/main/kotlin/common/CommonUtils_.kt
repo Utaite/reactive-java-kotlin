@@ -1,5 +1,8 @@
 package common
 
+import java.util.*
+
+
 class CommonUtils_ {
 
     companion object {
@@ -12,6 +15,11 @@ class CommonUtils_ {
 
         fun sleep(millis: Int) {
             Thread.sleep(millis.toLong())
+        }
+
+
+        fun doSomething() {
+            Thread.sleep(Random().nextInt(100).toLong())
         }
 
     }

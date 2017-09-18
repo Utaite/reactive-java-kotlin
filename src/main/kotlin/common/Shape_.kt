@@ -12,8 +12,19 @@ class Shape_ {
         val PENTAGON = "PENTAGON"
         val STAR = "STAR"
         val BALL = "BALL"
+        val NO_SHAPE = "NO_SHAPE"
 
-        private fun getSuffix(shape: String): String =
+
+        fun getColor(shape: String): String =
+                when (shape.endsWith("<>")) {
+                    true -> shape.replace("<>", "").trim()
+                    false -> when (shape.indexOf("-") > 0) {
+                        true -> shape.substring(0, shape.indexOf("-"))
+                        false -> shape
+                    }
+                }
+
+        fun getSuffix(shape: String): String =
                 when (shape) {
                     HEXAGON -> "-H"
                     OCTAGON -> "-O"
@@ -23,6 +34,19 @@ class Shape_ {
                     PENTAGON -> "-P"
                     STAR -> "-S"
                     else -> ""
+                }
+
+        fun getShape(obj: String): String =
+                when {
+                    obj.isEmpty() -> NO_SHAPE
+                    obj.endsWith("-H") -> HEXAGON
+                    obj.endsWith("-O") -> OCTAGON
+                    obj.endsWith("-R") -> RECTANGLE
+                    obj.endsWith("-T") -> TRIANGLE
+                    obj.endsWith("<>") -> DIAMOND
+                    obj.endsWith("-P") -> PENTAGON
+                    obj.endsWith("-S") -> STAR
+                    else -> "BALL"
                 }
 
         fun getString(color: String, shape: String): String =

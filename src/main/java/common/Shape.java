@@ -10,8 +10,23 @@ public class Shape {
     public static final String PENTAGON = "PENTAGON";
     public static final String STAR = "STAR";
     public static final String BALL = "BALL";
+    public static final String NO_SHAPE = "NO_SHAPE";
 
-    private static String getSuffix(String shape) {
+
+    public static String getColor(String shape) {
+        if(shape.endsWith("<>")) {
+            return shape.replace("<>", "").trim();
+        } else {
+            int hyphen = shape.indexOf("-");
+            if(hyphen > 0) {
+                return shape.substring(0, hyphen);
+            } else {
+                return shape;
+            }
+        }
+    }
+
+    public static String getSuffix(String shape) {
         if (HEXAGON.equals(shape)) {
             return "-H";
         } else if (OCTAGON.equals(shape)) {
@@ -28,6 +43,28 @@ public class Shape {
             return "-S";
         } else {
             return "";
+        }
+    }
+
+    public static String getShape(String obj) {
+        if (obj.isEmpty()) {
+            return NO_SHAPE;
+        } else if (obj.endsWith("-H")) {
+            return HEXAGON;
+        } else if (obj.endsWith("-O")) {
+            return OCTAGON;
+        } else if (obj.endsWith("-R")) {
+            return RECTANGLE;
+        } else if (obj.endsWith("-T")) {
+            return TRIANGLE;
+        } else if (obj.endsWith("<>")) {
+            return DIAMOND;
+        } else if (obj.endsWith("-P")) {
+            return PENTAGON;
+        } else if (obj.endsWith("-S")) {
+            return STAR;
+        } else {
+            return "BALL";
         }
     }
 
