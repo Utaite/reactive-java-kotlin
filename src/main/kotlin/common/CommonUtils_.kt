@@ -7,6 +7,9 @@ class CommonUtils_ {
 
     companion object {
 
+        val GITHUB_ROOT = "https://raw.githubusercontent.com/yudong80/reactivejava/master/"
+
+
         var startTime: Long = 0
 
         fun exampleStart() {
@@ -21,6 +24,12 @@ class CommonUtils_ {
         fun doSomething() {
             Thread.sleep(Random().nextInt(100).toLong())
         }
+
+
+        private val ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+        fun numberToAlphabet(x: Int): String =
+                ALPHABET[x % ALPHABET.length].toString()
 
     }
 

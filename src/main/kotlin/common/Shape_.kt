@@ -13,6 +13,7 @@ class Shape_ {
         val STAR = "STAR"
         val BALL = "BALL"
         val NO_SHAPE = "NO_SHAPE"
+        val FLIPPED = "(flipped)"
 
 
         fun getColor(shape: String): String =
@@ -52,6 +53,17 @@ class Shape_ {
         fun getString(color: String, shape: String): String =
                 color + getSuffix(shape)
 
+        @Throws(Exception::class)
+        fun flip(item: String): String =
+                when (item.startsWith(FLIPPED)) {
+                    false -> {
+                        when (getShape(item)) {
+                            BALL, RECTANGLE, DIAMOND, NO_SHAPE -> throw Exception()
+                        }
+                        FLIPPED + item
+                    }
+                    true -> item.replace(FLIPPED, "")
+                }
 
     }
 

@@ -27,6 +27,12 @@ class OkHttpHelper_ {
 
         }
 
+        @Throws(IOException::class)
+        fun getWithLog(url: String): String {
+            println("OkHttp call URL = " + url)
+            return get(url)
+        }
+
     }
 
 }

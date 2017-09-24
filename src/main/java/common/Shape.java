@@ -11,14 +11,15 @@ public class Shape {
     public static final String STAR = "STAR";
     public static final String BALL = "BALL";
     public static final String NO_SHAPE = "NO_SHAPE";
+    public static final String FLIPPED = "(flipped)";
 
 
     public static String getColor(String shape) {
-        if(shape.endsWith("<>")) {
+        if (shape.endsWith("<>")) {
             return shape.replace("<>", "").trim();
         } else {
             int hyphen = shape.indexOf("-");
-            if(hyphen > 0) {
+            if (hyphen > 0) {
                 return shape.substring(0, hyphen);
             } else {
                 return shape;
@@ -70,6 +71,22 @@ public class Shape {
 
     public static String getString(String color, String shape) {
         return color + getSuffix(shape);
+    }
+
+
+    public static String flip(String item) throws Exception {
+        if (item.startsWith(FLIPPED)) {
+            return item.replace(FLIPPED, "");
+        }
+        String shape = getShape(item);
+        switch (shape) {
+            case BALL:
+            case RECTANGLE:
+            case DIAMOND:
+            case NO_SHAPE:
+                throw new Exception();
+        }
+        return FLIPPED + item;
     }
 
 }

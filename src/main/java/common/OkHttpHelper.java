@@ -25,4 +25,9 @@ public class OkHttpHelper {
         }
     }
 
+    public static String getWithLog(String url) throws IOException {
+        System.out.println("OkHttp call URL = " + url);
+        return get(url);
+    }
+
 }
